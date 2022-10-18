@@ -18,30 +18,30 @@ for row in ws:
 		list_grade.append([row_id, sum_v])
 	row_id += 1
 	
-list_total = sorted(list_grade, key = lambda x:x[1])
+list_total = sorted(list_grade, key = lambda x:x[1], reverse=True)
 a = int(len(list_total) * 0.3)
 ap = int(a * 0.5)
-b = int((len(list_total) * 0.7) - a)
+b = int(len(list_total) * 0.7) - a
 bp = int(b * 0.5)
-c = int(len(list_total) - a -b)
+c = int(len(list_total))- a -b
 cp = int(c * 0.5)
 
 
 
-for i in range(len(list_total)):
-	if i <= ap:
-		ws.cell(row = list_total[i][0], column = 8).value = 'A+'
-	elif i <= a:
-		ws.cell(row = list_total[i][0], column = 8).value = 'A0'
-	elif i <= bp:
-		ws.cell(row = list_total[i][0], column = 8).value = 'B+'
-	elif i <= b:
-		ws.cell(row = list_total[i][0], column = 8).value = 'B0'
-	elif i <= cp:
-		ws.cell(row = list_total[i][0], column = 8).value = 'C+'
-	elif i <= c:
-		ws.cell(row = list_total[i][0], column = 8).value = 'C0'
-	i += 1
+for i in range(a):
+	ws.cell(row = list_total[i][0], column = 8).value = 'A0'
+for i in range(ap):
+	ws.cell(row = list_total[i][0], column = 8).value = 'A+'
+for i in range(a, a+b):
+	ws.cell(row = list_total[i][0], column = 8).value = 'B0'
+for i in range(a, a+bp):
+	ws.cell(row = list_total[i][0], column = 8).value = 'B+'
+for i in range(a+b, a+b+c):
+	ws.cell(row = list_total[i][0], column = 8).value = 'C0'
+for i in range(a+b, a+b+cp):
+	ws.cell(row = list_total[i][0], column = 8).value = 'C+'
+
+	
 wb.save("student.xlsx")
 wb.close()
 		
